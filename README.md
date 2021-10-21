@@ -1,4 +1,4 @@
-# Team Project - printf
+# Team Project - Simple Shell
 
 This is ALX-Holerton's team project focusing on writing a simple UNIX command interpreter.
 
