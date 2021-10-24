@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
-* run_parent_shell - runs the parent shell
+* run_child_shell - runs a child shell
 *
 * Return: 0 for success, 1 otherwise
 */
@@ -40,8 +40,8 @@ int run_child_shell(void)
 
 		if (child_pid == 0)
 		{
-                	if (check_hsh(argv[0]))
-                        	run_child_shell();
+			if (check_hsh(argv[0]))
+				run_child_shell();
 			if (execve(argv[0], argv, NULL) == -1)
 				return (1);
 		}
