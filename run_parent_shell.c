@@ -41,7 +41,7 @@ int run_parent_shell(void)
 		if (child_pid == 0)
 		{
 			if (check_hsh(argv[0]))
-                        	run_child_shell();
+				run_child_shell();
 			if (execve(argv[0], argv, NULL) == -1)
 				return (1);
 		}
