@@ -1,0 +1,24 @@
+.\" Manpage for HSH
+.TH man 1 "24 October 2021" "1.0" "hsh man page"
+.SH PROLOG
+This manual page is for ALX-Holberton project called simple_shell where we create our own shell that interprets command.
+.SH NAME
+hsh - holberton shell, simple command language interpreter
+.SH SYNOPSIS
+hsh [command_file [argument ...]]
+.SH DESCRIPTION
+The hsh utility is a command language interpreter that shall execute commands read from a command line string, the standard input, or a specified file.
+.SH OPERANDS
+The following operands are supported:
+.RS 3
+command_file - The pathname of a file containing commands.
+.RS 0
+argument - The arguments/parameters for the command_file
+.SH SEE ALSO
+.I sh(1)
+.SH AUTHORS
+.RS 3
+Kidus Worku
+.RS 0
+Nahom Terefe
+
