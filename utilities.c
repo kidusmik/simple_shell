@@ -1,14 +1,16 @@
 #include "main.h"
 
 /**
-* check_command_file - checks if the command file exists
+* check_command - checks if the command file exists
 * @command_file: the command file
+* @st: pointer to structure of stat
+* @prompt: the prompt string
 *
 * Return: 0 if it exists, otherwise 1
 */
 int check_command(char *command_file, struct stat *st, char *prompt)
 {
-	if(command_file == NULL)
+	if (command_file == NULL)
 	{
 		printf("%s", prompt);
 		return (1);
