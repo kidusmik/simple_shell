@@ -14,12 +14,13 @@ int count_env_vars(char **env)
 void _setenv(char *hsh_env_name, char *this_pid_str, int env_count, int pid_length, char **env)
 {
 	char *env_value;
-	int i;
-	int buff_size;
+	int i, str_len;
+	size_t buff_size;
 
-	buff_size = 8 + pid_length;
-	i = 0;
+	str_len = _strlen(hsh_env_name);
+	buff_size = str_len + pid_length + 2;
 	env_value = malloc(sizeof(char) * buff_size);
+	i = 0;
 
 	while (*hsh_env_name != '\0')
 	{
