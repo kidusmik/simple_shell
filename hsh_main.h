@@ -21,4 +21,6 @@ pid_t str_to_pid(char *pid_str);
 int power(int a, int b);
 int count_env_vars(char **env);
 void _setenv(char *hsh_env_name, char *this_pid_str, int env_count, int pid_length, char **env);
+int _strlen(char *string);
+
 #endif /* HSH_MAIN_H */
