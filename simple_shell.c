@@ -2,6 +2,9 @@
 
 /**
 * main - entry point for the hsh shell
+* @argc: arguments count
+* @argv: arguments list
+* @env: environments list
 *
 * Return: Always 0.
 */
@@ -49,6 +52,12 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv, 
 		if (check_exit(comm_params[0]))
 			exit(0);
 
+		if(check_printenv(comm_params[0]))
+		{
+			_printenv(env);
+			printf("%s", prompt);
+			continue;
+		}
 		if (check_command(comm_params[0], &st, prompt))
 			continue;
 

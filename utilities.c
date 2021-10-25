@@ -108,6 +108,33 @@ void create_child(pid_t *child_pid)
 * Return: result of the power
 */
 
+/**
+* check_exit - checks if the command is exit
+* @command_file: the command
+*
+* Return: 1 if true, otherwise 0
+*/
+int check_printenv(char *command_file)
+{
+	int i;
+	char *printenv_comm;
+
+	i = 0;
+	printenv_comm = "env";
+
+	while (i < 4)
+	{
+		if (*(command_file + i) != *(printenv_comm + i))
+			return (0);
+
+		i++;
+	}
+
+	return (1);
+}
+
+
+
 int power(int a, int b)
 {
 	int p_result;

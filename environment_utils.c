@@ -41,3 +41,16 @@ void _setenv(char *hsh_env_name, char *this_pid_str, int env_count, int pid_leng
 	env[env_count] = env_value;
 	env[env_count + 1] = NULL;
 }
+
+
+void _printenv(char **env)
+{
+	int i;
+
+	i = 0;
+	while(env[i] != NULL)
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
+}
