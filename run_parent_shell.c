@@ -1,4 +1,4 @@
-#include "main.h"
+#include "hsh_main.h"
 
 /**
 * run_parent_shell - runs the parent shell
