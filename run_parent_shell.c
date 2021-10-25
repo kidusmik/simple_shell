@@ -5,7 +5,7 @@
 *
 * Return: 0 for success, 1 otherwise
 */
-int run_parent_shell(void)
+int run_parent_shell(pid_t hsh_pid, pid_t this_pid, char **env)
 {
 	char *buffer, *delim, *params, *prompt;
 	char *argv[2];
@@ -14,11 +14,19 @@ int run_parent_shell(void)
 	pid_t child_pid;
 	struct stat st;
 
+	printf("HSH PID is: %d\n", hsh_pid);
+	printf("This PID is: %d\n", this_pid);
+
 	argv[1] = NULL;
 	b_size = 32;
 	buffer = malloc(sizeof(char) * b_size);
 	delim = "\n";
-	prompt = "$ ";
+
+	if (this_pid > hsh_pid)
+		prompt = "($) ";
+	else
+		prompt = "$ ";
+/*	prompt = "$ "; */
 
 	printf("%s", prompt);
 
@@ -33,6 +41,7 @@ int run_parent_shell(void)
 		if (check_command(argv[0], &st, prompt))
 			continue;
 
+		/* create_child(*child_pid); */
 		child_pid = fork();
 
 		if (child_pid == -1)
@@ -40,9 +49,9 @@ int run_parent_shell(void)
 
 		if (child_pid == 0)
 		{
-			if (check_hsh(argv[0]))
-				run_child_shell();
-			if (execve(argv[0], argv, NULL) == -1)
+			/*if (check_hsh(argv[0]))
+				run_child_shell(); */
+			if (execve(argv[0], argv, env) == -1)
 				return (1);
 		}
 		else
