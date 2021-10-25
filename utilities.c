@@ -74,3 +74,56 @@ int check_hsh(char *command_file)
 
 	return (1);
 }
+
+/*
+* create_child - creates a child process
+* @child_pid: pid_t to store the pid
+*
+* Return: Always Void
+*
+void create_child(pid_t *child_pid)
+{
+	*child_pid = fork();
+
+	if (*child_pid == -1)
+	{
+		handle_error(errno);
+		exit(1);
+	}
+}
+*/
+/**
+* handle_error - handles errors
+* errorno: the error number
+* @command_name: the command name
+*
+* Return:
+*/
+
+/**
+* power - give the power of the number
+* @a: number to be powered
+* @b: the power
+*
+* Return: result of the power
+*/
+
+int power(int a, int b)
+{
+	int p_result;
+
+	p_result = 1;
+
+	if (b == 0)
+		return (1);
+	if (b == 1)
+		return (a);
+
+	while (b)
+	{
+		p_result *= a;
+		b--;
+	}
+
+	return (p_result);
+}
