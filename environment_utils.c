@@ -1,4 +1,4 @@
-#include "main.h"
+#include "hsh_main.h"
 
 int count_env_vars(char **env)
 {
