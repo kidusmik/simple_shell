@@ -1,4 +1,4 @@
-#include "main.h"
+#include "hsh_main.h"
 
 /**
 * main - entry point for the hsh shell
