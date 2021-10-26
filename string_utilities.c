@@ -1,4 +1,4 @@
-#include "hsh_main.h"
+#include "hsh.h"
 
 void _strcat(char *path, char *command, char *command_path)
 {

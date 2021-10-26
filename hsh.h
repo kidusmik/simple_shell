@@ -1,5 +1,5 @@
-#ifndef HSH_MAIN_H
-#define HSH_MAIN_H
+#ifndef HSH_H
+#define HSH_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,18 +19,22 @@ int char_to_int(char *ch);
 pid_t str_to_pid(char *pid_str);
 int power(int a, int b);
 int count_env_vars(char **env);
-void _setenv(char *hsh_env_name, char *this_pid_str, int env_count, int pid_length, char **env);
+void _setenv(char *hsh_env_name, char *this_pid_str,
+		int env_count, int pid_length,
+		char **env);
 int _strlen(char *string);
 int check_printenv(char *command_file);
 void _printenv(char **env);
 void _strcat(char *path, char *command, char *command_path);
 char *find_command(char *command_file, char **path);
-char * _strdup(char *from);
+char *_strdup(char *from);
 char *get_prompt(char **env);
 void print_prompt(char *prompt);
 void get_each_paths(char **path);
 void get_each_command_argv(char **command_argv, char *input_buffer);
 int _strcmp(char *string1, char *string2);
-int execute_command(char *command, char **command_argv, char **env, char *prompt);
+int execute_command(char *command, char **command_argv,
+			char **env,
+			char *prompt);
 
-#endif /* HSH_MAIN_H */
+#endif /* HSH_H */

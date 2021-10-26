@@ -1,4 +1,4 @@
-#include "hsh_main.h"
+#include "hsh.h"
 
 /**
 * len_pid - determines the length of the pid

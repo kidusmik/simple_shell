@@ -1,4 +1,4 @@
-#include "hsh_main.h"
+#include "hsh.h"
 
 /**
 * get_prompt - gets which prompt to print

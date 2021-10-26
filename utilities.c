@@ -1,4 +1,4 @@
-#include "hsh_main.h"
+#include "hsh.h"
 
 /**
 * check_command - checks if the command file exists
