@@ -58,7 +58,7 @@ pid_t str_to_pid(char *pid_str)
 	char *pid_str_ptr;
 	int len, digit;
 	pid_t result;
-	
+
 	result = 0;
 	pid_str_ptr = pid_str;
 	len = 0;
@@ -116,7 +116,7 @@ int char_to_int(char *ch)
 
 /**
 * _strlen - find the string length
-* @str: the string
+* @string: the string
 *
 * Return: the length
 */
