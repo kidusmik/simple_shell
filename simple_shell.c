@@ -12,10 +12,11 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv, 
 {
 	pid_t this_pid, hsh_pid, child_pid;
 	char *hsh_pid_str, *hsh_pid_env_name, *this_pid_str;
-	char *buffer, *delim, *params, *prompt, *comm_params[2];
-	int pid_length, env_count, status;
-	struct stat st;
+	char *buffer, *delim, *params, *prompt, *comm_params[50];
+	char *path[50], *paths, *command, *path_buff;
+	int pid_length, env_count, status, i;
 	size_t b_size;
+	ssize_t chk_line;
 
 	hsh_pid_env_name = "HSHPID";
 	this_pid = getpid();
@@ -32,11 +33,9 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv, 
 	else
 		hsh_pid = str_to_pid(hsh_pid_str);
 
-	comm_params[1] = NULL;
 	b_size = 32;
 	buffer = malloc(sizeof(char) * b_size);
-	delim = "\n";
-
+	delim = " \t\r\n\v\f";
 	if (this_pid > hsh_pid)
 		prompt = "($) ";
 	else
@@ -44,11 +43,44 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv, 
 
 	printf("%s", prompt);
 
-	while (getline(&buffer, &b_size, stdin) != -1)
-	{
-		params = strtok(buffer, delim);
-		comm_params[0] = params;
+	path_buff = getenv("PATH");
 
+	paths = strtok(path_buff, ":");
+	i = 0;
+	while (paths)
+	{
+		path[i] = paths;
+		paths = strtok(NULL, ":");
+		i++;
+	}
+	path[i] = NULL;
+	
+	chk_line = 1;
+	while (chk_line)
+	{
+		chk_line = getline(&buffer, &b_size, stdin);
+		if (chk_line == EOF || chk_line == -1 || chk_line < 1)
+		{
+			chk_line = 1;
+			continue;
+		}
+
+		params = strtok(buffer, delim);
+
+		i = 0;
+		while (params)
+		{
+			comm_params[i] = params;
+			params = strtok(NULL, delim);
+			i++;
+		}
+		comm_params[i] = NULL;
+
+		if (comm_params[0] == NULL)
+		{
+			printf("%s", prompt);
+			continue;
+		}		
 		if (check_exit(comm_params[0]))
 			exit(0);
 
@@ -58,8 +90,17 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv, 
 			printf("%s", prompt);
 			continue;
 		}
-		if (check_command(comm_params[0], &st, prompt))
+/*		if (check_command(comm_params[0], prompt))
 			continue;
+*/
+		command = find_command(comm_params[0], path);
+	
+		if (command == NULL)
+		{
+			printf("%s: No such file or directory\n", comm_params[0]);
+			printf("%s", prompt);
+			continue;
+		}
 
 		child_pid = fork();
 
@@ -68,7 +109,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv, 
 
 		if (child_pid == 0)
 		{
-			if (execve(comm_params[0], comm_params, env) == -1)
+			if (execve(command, comm_params, env) == -1)
 				return (1);
 		}
 		else

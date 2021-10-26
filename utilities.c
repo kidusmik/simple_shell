@@ -8,14 +8,18 @@
 *
 * Return: 0 if it exists, otherwise 1
 */
-int check_command(char *command_file, struct stat *st, char *prompt)
+int check_command(char *command_file, char *prompt)
 {
+	int stat_f;
+
+	stat_f = access(command_file, X_OK);
 	if (command_file == NULL)
 	{
 		printf("%s", prompt);
 		return (1);
 	}
-	else if (stat(command_file, st) != 0)
+	
+	else if (stat_f != 0)
 	{
 		printf("%s: No such file or directory\n", command_file);
 		printf("%s", prompt);
@@ -23,6 +27,36 @@ int check_command(char *command_file, struct stat *st, char *prompt)
 	}
 
 	return (0);
+}
+
+char *find_command(char *command_file, char **path)
+{
+	int stat_f, i;
+	char *command_path;
+
+	command_path = malloc(sizeof(char) * 50);
+	stat_f = access(command_file, X_OK);
+	i = 0;
+
+	if (stat_f == 0)
+		command_path = command_file;
+
+	else
+	{
+		while (path[i] != NULL)
+		{
+			_strcat(path[i], command_file, command_path);
+			stat_f = access(command_path, X_OK);
+			if (stat_f == 0)
+				return (command_path);
+			
+			i++;
+		}
+
+		command_path = NULL;
+	}
+
+	return (command_path);
 }
 
 /**

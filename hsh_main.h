@@ -9,8 +9,7 @@
 #include <string.h>
 #include <sys/stat.h>
 
-int run_parent_shell(pid_t hsh_pid, pid_t this_pid, char **env);
-int check_command(char *command_file, struct stat *st, char *prompt);
+int check_command(char *command_file, char *prompt);
 int check_exit(char *command_file);
 int run_child_shell(void);
 int check_hsh(char *command_file);
@@ -24,5 +23,7 @@ void _setenv(char *hsh_env_name, char *this_pid_str, int env_count, int pid_leng
 int _strlen(char *string);
 int check_printenv(char *command_file);
 void _printenv(char **env);
+void _strcat(char *path, char *command, char *command_path);
+char *find_command(char *command_file, char **path);
 
 #endif /* HSH_MAIN_H */
