@@ -13,7 +13,7 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv, 
 	pid_t this_pid, hsh_pid, child_pid;
 	char *hsh_pid_str, *hsh_pid_env_name, *this_pid_str;
 	char *buffer, *delim, *params, *prompt, *comm_params[50];
-	char *path[50], *paths, *command, *path_buff;
+	char *path[50], *paths, *command, *path_buff, *path_dup;
 	int pid_length, env_count, status, i;
 	size_t b_size;
 	ssize_t chk_line;
@@ -45,7 +45,9 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv, 
 
 	path_buff = getenv("PATH");
 
-	paths = strtok(path_buff, ":");
+	path_dup = _strdup(path_buff);
+
+	paths = strtok(path_dup, ":");
 	i = 0;
 	while (paths)
 	{

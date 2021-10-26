@@ -125,11 +125,8 @@ int _strlen(char *string)
 	int length;
 
 	length = 0;
-	while (*string != '\0')
-	{
+	while (*(string + length) != '\0')
 		length++;
-		string = string + 1;
-	}
 
 	return (length - 1);
 }

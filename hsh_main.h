@@ -25,5 +25,6 @@ int check_printenv(char *command_file);
 void _printenv(char **env);
 void _strcat(char *path, char *command, char *command_path);
 char *find_command(char *command_file, char **path);
+char * _strdup(char *from);
 
 #endif /* HSH_MAIN_H */
