@@ -30,5 +30,7 @@ char *get_prompt(char **env);
 void print_prompt(char *prompt);
 void get_each_paths(char **path);
 void get_each_command_argv(char **command_argv, char *input_buffer);
+int _strcmp(char *string1, char *string2);
+int execute_command(char *command, char **command_argv, char **env, char *prompt);
 
 #endif /* HSH_MAIN_H */

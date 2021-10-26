@@ -10,10 +10,8 @@
 */
 int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv, char **env)
 {
-	pid_t child_pid;
-	char *input_buffer, *prompt, *command_argv[50];
-	char *path[50], *command;
-	int status;
+	char *input_buffer, *prompt, *command_argv[50], *path[50], *command;
+	int ret;
 	size_t b_size;
 	ssize_t chk_line;
 
@@ -40,42 +38,25 @@ int main(__attribute__((unused)) int argc, __attribute__((unused)) char **argv, 
 
 		if (command_argv[0] == NULL)
 		{
-			printf("%s", prompt);
-			continue;
-		}		
-		if (check_exit(command_argv[0]))
-			exit(0);
-
-		if(check_printenv(command_argv[0]))
-		{
-			_printenv(env);
-			printf("%s", prompt);
+			print_prompt(prompt);
 			continue;
 		}
 
 		command = find_command(command_argv[0], path);
-	
+
 		if (command == NULL)
 		{
 			printf("%s: No such file or directory\n", command_argv[0]);
-			printf("%s", prompt);
+			print_prompt(prompt);
 			continue;
 		}
 
-		child_pid = fork();
+		ret = execute_command(command, command_argv, env, prompt);
 
-		if (child_pid == -1)
-			return (1);
-
-		if (child_pid == 0)
+		if (ret)
 		{
-			if (execve(command, command_argv, env) == -1)
-				return (1);
-		}
-		else
-		{
-			wait(&status);
-			printf("%s", prompt);
+			print_prompt(prompt);
+			continue;
 		}
 	}
 

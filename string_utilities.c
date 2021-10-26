@@ -41,4 +41,21 @@ char * _strdup(char *from)
 	*(dup_str + i) = '\0';
 
 	return (dup_str);
-}		
+}
+
+int _strcmp(char *string1, char *string2)
+{
+	int i;
+
+	i = 0;
+
+	while (*(string1 + i) != '\0')
+	{
+		if (*(string1 + i) != *(string2	+ i))
+			return (0);
+
+		i++;
+	}
+
+	return (1);
+}	

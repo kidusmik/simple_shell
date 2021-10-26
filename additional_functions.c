@@ -66,3 +66,36 @@ void get_each_command_argv(char **command_argv, char *input_buffer)
 	}
 	command_argv[i] = NULL;
 }
+
+int execute_command(char *command, char **command_argv, char **env, char *prompt)
+{
+	pid_t child_pid;
+	int status;
+
+	if (_strcmp(command, "exit"))
+		exit(0);
+	else if (_strcmp(command, "env"))
+	{
+		_printenv(env);
+		return (1);
+	}
+	else
+	{
+		child_pid = fork();
+
+		if (child_pid == -1)
+			return (0);
+
+		if (child_pid == 0)
+		{
+			if (execve(command, command_argv, env) == -1)
+				return (0);
+		}
+		else
+		{
+			wait(&status);
+			print_prompt(prompt);
+		}
+	}
+	return (0);
+}

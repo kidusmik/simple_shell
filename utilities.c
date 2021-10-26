@@ -39,8 +39,11 @@ char *find_command(char *command_file, char **path)
 	i = 0;
 
 	if (stat_f == 0)
-		command_path = command_file;
-
+		return (command_file);
+	else if (_strcmp(command_file, "exit"))
+		return (_strdup("exit"));
+	else if (_strcmp(command_file, "env"))
+		return (_strdup("env"));
 	else
 	{
 		while (path[i] != NULL)
@@ -52,11 +55,9 @@ char *find_command(char *command_file, char **path)
 			
 			i++;
 		}
-
-		command_path = NULL;
 	}
 
-	return (command_path);
+	return (NULL);
 }
 
 /**
