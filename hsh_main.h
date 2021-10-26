@@ -26,5 +26,9 @@ void _printenv(char **env);
 void _strcat(char *path, char *command, char *command_path);
 char *find_command(char *command_file, char **path);
 char * _strdup(char *from);
+char *get_prompt(char **env);
+void print_prompt(char *prompt);
+void get_each_paths(char **path);
+void get_each_command_argv(char **command_argv, char *input_buffer);
 
 #endif /* HSH_MAIN_H */
