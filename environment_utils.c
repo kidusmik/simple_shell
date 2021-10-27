@@ -55,6 +55,7 @@ void _setenv(char *hsh_env_name, char *this_pid_str,
 
 	env[env_count] = env_value;
 	env[env_count + 1] = NULL;
+	free(env_value);
 }
 
 /**

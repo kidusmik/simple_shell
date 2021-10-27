@@ -28,13 +28,9 @@ int main(__attribute__((unused)) int argc,
 			print_prompt(prompt);
 			continue;
 		}
-		command = find_command(command_argv[0], path);
+		command = find_command(command_argv[0], path, prompt);
 		if (command == NULL)
-		{
-			printf("%s: No such file or directory\n", command_argv[0]);
-			print_prompt(prompt);
 			continue;
-		}
 		ret = execute_command(command, command_argv, env, prompt);
 		if (ret)
 		{
@@ -42,5 +38,7 @@ int main(__attribute__((unused)) int argc,
 			continue;
 		}
 	}
+	free_ptrs(input_buffer, prompt, command);
+	free_dptr(command_argv, path, 50);
 	return (0);
 }

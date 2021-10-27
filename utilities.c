@@ -19,11 +19,7 @@ int check_command(char *command_file, char *prompt)
 	}
 
 	else if (stat_f != 0)
-	{
-		printf("%s: No such file or directory\n", command_file);
-		printf("%s", prompt);
 		return (1);
-	}
 
 	return (0);
 }
@@ -32,10 +28,11 @@ int check_command(char *command_file, char *prompt)
 * find_command - finds the command in the environment
 * @command_file: the command
 * @path: the path list
+* @prompt: the prompt
 *
 * Return: pointer to the command found
 */
-char *find_command(char *command_file, char **path)
+char *find_command(char *command_file, char **path, char *prompt)
 {
 	int stat_f, i;
 	char *command_path;
@@ -60,7 +57,9 @@ char *find_command(char *command_file, char **path)
 
 		i++;
 	}
-
+	perror(command_file);
+	print_prompt(prompt);
+	free(command_path);
 	return (NULL);
 }
 

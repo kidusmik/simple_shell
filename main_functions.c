@@ -27,6 +27,10 @@ char *get_prompt(char **env)
 	else
 		hsh_pid = str_to_pid(hsh_pid_str);
 
+
+	free(hsh_pid_env_name);
+	free(hsh_pid_str);
+	free(hsh_pid_str);
 	return (this_pid > hsh_pid ? "($) " : "$ ");
 }
 
@@ -65,6 +69,11 @@ void get_each_paths(char **path)
 		i++;
 	}
 	path[i] = NULL;
+
+	free(path_buff);
+	free(path_dup);
+	free(paths);
+	free(path_env_name);
 }
 
 /**
@@ -91,6 +100,9 @@ void get_each_command_argv(char **command_argv, char *input_buffer)
 		i++;
 	}
 	command_argv[i] = NULL;
+
+	free(delim_args);
+	free(args);
 }
 
 /**
