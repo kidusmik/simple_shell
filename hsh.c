@@ -38,7 +38,6 @@ int main(__attribute__((unused)) int argc,
 			continue;
 		}
 	}
-	free_ptrs(input_buffer, prompt, command);
-	free_dptr(command_argv, path, 50);
+
 	return (0);
 }

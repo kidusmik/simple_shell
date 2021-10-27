@@ -59,7 +59,7 @@ char *find_command(char *command_file, char **path, char *prompt)
 	}
 	perror(command_file);
 	print_prompt(prompt);
-	free(command_path);
+
 	return (NULL);
 }
 

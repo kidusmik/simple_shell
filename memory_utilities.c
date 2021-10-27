@@ -34,6 +34,4 @@ void free_dptr(char **dptr1, char **dptr2, int size)
 		free(dptr2[i]);
 		i++;
 	}
-	free(dptr1);
-	free(dptr2);
 }
