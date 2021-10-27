@@ -34,7 +34,8 @@ void get_each_paths(char **path);
 void get_each_command_argv(char **command_argv, char *input_buffer);
 int _strcmp(char *string1, char *string2);
 int execute_command(char *command, char **command_argv,
-			char **env);
-int line_input_check(char **input_buffer, size_t *b_size, FILE *stream, ssize_t *chk_line);
+			char **env, char *prompt);
+ssize_t line_input_check(char **input_buffer, size_t *b_size,
+				FILE *stream, char *prompt);
 
 #endif /* HSH_H */

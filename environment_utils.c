@@ -1,5 +1,11 @@
 #include "hsh.h"
 
+/**
+* count_env_vars - counts the environment variables
+* @env: the environment list
+*
+* Return: the count
+*/
 int count_env_vars(char **env)
 {
 	int count;
@@ -11,7 +17,16 @@ int count_env_vars(char **env)
 	return (count);
 }
 
-void _setenv(char *hsh_env_name, char *this_pid_str, int env_count, int pid_length, char **env)
+/**
+*  _setenv - sets a new environment path
+* @hsh_env_name: the environment name for hsh shell
+* @this_pid_str: the current shell's pid
+* @env_count: the environment count
+* @pid_length: the length of the current shell's pid
+* @env: the environment list
+*/
+void _setenv(char *hsh_env_name, char *this_pid_str,
+		int env_count, int pid_length, char **env)
 {
 	char *env_value;
 	int i, str_len;
@@ -42,13 +57,18 @@ void _setenv(char *hsh_env_name, char *this_pid_str, int env_count, int pid_leng
 	env[env_count + 1] = NULL;
 }
 
-
+/**
+* _printenv - prints the environment list
+* @env: the environment list
+*
+* Return: Always void
+*/
 void _printenv(char **env)
 {
 	int i;
 
 	i = 0;
-	while(env[i] != NULL)
+	while (env[i] != NULL)
 	{
 		printf("%s\n", env[i]);
 		i++;

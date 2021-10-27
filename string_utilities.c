@@ -1,5 +1,13 @@
 #include "hsh.h"
 
+/**
+* _strcat - concatenates two strings
+* @path: the path string
+* @command: the command
+* @command_path: the string to store the concatenation
+*
+* Return: Always void
+*/
 void _strcat(char *path, char *command, char *command_path)
 {
 	int i, j;
@@ -24,7 +32,13 @@ void _strcat(char *path, char *command, char *command_path)
 	*(command_path + i) = '\0';
 }
 
-char * _strdup(char *from)
+/**
+* _strdup - duplicates a string
+* @from: the string to be duplicated
+*
+* Return: ponter to the duplicated string
+*/
+char *_strdup(char *from)
 {
 	int i, len;
 	char *dup_str;
@@ -43,6 +57,13 @@ char * _strdup(char *from)
 	return (dup_str);
 }
 
+/**
+* _strcmp - compares two strings
+* @string1: the first string
+* @string2: the second string
+*
+* Return: 1 if true, otherwise 0
+*/
 int _strcmp(char *string1, char *string2)
 {
 	int i;
@@ -58,4 +79,4 @@ int _strcmp(char *string1, char *string2)
 	}
 
 	return (1);
-}	
+}
