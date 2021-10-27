@@ -103,7 +103,7 @@ void get_each_command_argv(char **command_argv, char *input_buffer)
 * Return: 1 on success, otherwise 0
 */
 int execute_command(char *command, char **command_argv,
-				char **env, char *prompt)
+				char **env)
 {
 	pid_t child_pid;
 	int status;
@@ -128,10 +128,7 @@ int execute_command(char *command, char **command_argv,
 				return (0);
 		}
 		else
-		{
 			wait(&status);
-			print_prompt(prompt);
-		}
 	}
 	return (0);
 }
