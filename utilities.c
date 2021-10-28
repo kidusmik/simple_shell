@@ -37,25 +37,30 @@ char *find_command(char *command_file, char **path, char *prompt)
 	int stat_f, i;
 	char *command_path;
 
-	command_path = malloc(sizeof(char) * 50);
-	stat_f = access(command_file, X_OK);
 	i = 0;
-
-	if (stat_f == 0)
-		return (command_file);
+	command_path = malloc(sizeof(char) * 50);
+	if (*command_file == '.' || *command_file == '/')
+	{
+		stat_f = access(command_file, X_OK);
+		if (stat_f == 0)
+			return (command_file);
+	}
 	else if (_strcmp(command_file, "exit"))
 		return (_strdup("exit"));
 	else if (_strcmp(command_file, "env"))
 		return (_strdup("env"));
 
-	while (path[i] != NULL)
+	else
 	{
-		_strcat(path[i], command_file, command_path);
-		stat_f = access(command_path, X_OK);
-		if (stat_f == 0)
-			return (command_path);
+		while (path[i] != NULL)
+		{
+			_strcat(path[i], command_file, command_path);
+			stat_f = access(command_path, X_OK);
+			if (stat_f == 0)
+				return (command_path);
 
-		i++;
+			i++;
+		}
 	}
 	perror(command_file);
 	print_prompt(prompt);
