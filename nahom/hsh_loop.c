@@ -11,20 +11,18 @@
 int hsh_loop(char *av[], int execution_counter, char **env)
 {
 	int interactive = 1;
-	int status = 0;
+	int process_status = 0;
 	int i = 0;
 	int read = 0;
 	size_t len = 0;
-	int arg_len = 32;
-	char *line = NULL, *args[arg_len], *token = NULL;
-	char *delim_args = " \t\r\n\v\f";
+	char *line = NULL, *args[32], *token = NULL;
 
 	/*	- determine an interactive mode or not
 		- isatty: checkes if FD is valid or not
 	 */
 	isatty(STDIN_FILENO) == 0 ? interactive = 0 : interactive;
 
-	while (19)
+	while (1)
 	{
 		interactive == 1 ? write(STDIN_FILENO, "> ", 2) : interactive;
 
@@ -39,15 +37,15 @@ int hsh_loop(char *av[], int execution_counter, char **env)
 		if (read == EOF)
 		{
 			free(line), write(STDIN_FILENO, "\n", 1);
-			return (status);
+			return (process_status);
 		}
 		/* 
-			if command is exit then exit form the shell
+			if the command is exit then exit form the shell
 		 */
 		else if (_strncmp(line, "exit\n", 4) == 0)
 		{
 			free(line);
-			return (status);
+			return (process_status);
 		}
 		else
 		{
@@ -55,20 +53,18 @@ int hsh_loop(char *av[], int execution_counter, char **env)
 				print_env(env);
 			else if (read > 1)
 			{
-				token = strtok(line, delim_args);
-				args[0] = av[0];
-				for (i = 1; i < arg_len && token != NULL; i++)
-				{
-					args[i] = token, token = strtok(NULL, delim_args);
-				}
+				token = strtok(line, " \t\n\r"), args[0] = av[0];
+				for (i = 1; i < 32 && token != NULL; i++)
+					args[i] = token, token = strtok(NULL, " \t\n\r");
+
 				args[i] = NULL;
 				if (args[1])
 				{
-					status = create_process(args, execution_counter, env);
+					process_status = new_process(args, execution_counter, env);
 				}
 			}
 			execution_counter++;
 		}
 	}
-	return (status);
+	return (process_status);
 }

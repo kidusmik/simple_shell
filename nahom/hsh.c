@@ -7,10 +7,11 @@
  */
 int main(int ac, char *av[], char **env)
 {
-	// load config file if exits and define variables
-	(void)ac;
-	int execution_counter = 1;
+	/* load config file if exits and define variables */
+
+	int execution_coun = 1;
 	int status = 0;
+	(void)ac;
 
 	/* 
 	- Run command loop
@@ -28,6 +29,6 @@ int main(int ac, char *av[], char **env)
 		return (0);
 	}
 
-	status = hsh_loop(av, execution_counter, env);
+	status = hsh_loop(av, execution_coun, env);
 	return (status);
 }
