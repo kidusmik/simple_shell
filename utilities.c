@@ -80,17 +80,14 @@ int power(int a, int b)
 	int p_result;
 
 	p_result = 1;
-
 	if (b == 0)
 		return (1);
 	if (b == 1)
 		return (a);
-
 	while (b)
 	{
 		p_result *= a;
 		b--;
 	}
-
 	return (p_result);
 }

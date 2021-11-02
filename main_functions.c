@@ -1,36 +1,6 @@
 #include "hsh.h"
 
 /**
-* get_prompt - gets which prompt to print
-* @env: the envirnoment list
-*
-* Return: pointer to the prompt
-*/
-char *get_prompt(char **env)
-{
-	char *hsh_pid_env_name, *hsh_pid_str, *this_pid_str;
-	pid_t this_pid, hsh_pid;
-	int pid_length, env_count;
-
-	hsh_pid_env_name = "HSHPID";
-	this_pid = getpid();
-	hsh_pid_str = getenv(hsh_pid_env_name);
-	this_pid_str = pid_to_str(this_pid);
-
-	if (hsh_pid_str == NULL)
-	{
-		pid_length = len_pid(this_pid);
-		env_count = count_env_vars(env);
-		_setenv(hsh_pid_env_name, this_pid_str, env_count, pid_length, env);
-		hsh_pid = this_pid;
-	}
-	else
-		hsh_pid = str_to_pid(hsh_pid_str);
-
-	return (this_pid > hsh_pid ? "($) " : "$ ");
-}
-
-/**
 * print_prompt - prints the prompt
 * @prompt: the prompt string
 *
@@ -38,22 +8,26 @@ char *get_prompt(char **env)
 */
 void print_prompt(char *prompt)
 {
-	printf("%s", prompt);
+	int len;
+
+	len = _strlen(prompt);
+	write(STDOUT_FILENO, prompt, len + 1);
 }
 
 /**
 * get_each_paths - stores the path variables to a list
 * @path: the path list
+* @env: the environment
 *
 * Return: Always void
 */
-void get_each_paths(char **path)
+void get_each_paths(char **path, char **env)
 {
 	char *path_buff, *path_dup, *paths, *path_env_name;
 	int i;
 
 	path_env_name = "PATH";
-	path_buff = getenv(path_env_name);
+	path_buff = _getenv(path_env_name, env);
 	path_dup = _strdup(path_buff);
 	paths = strtok(path_dup, ":");
 

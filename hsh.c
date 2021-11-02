@@ -15,9 +15,9 @@ int main(__attribute__((unused)) int argc,
 	int ret;
 	size_t b_size;
 
-	prompt = get_prompt(env);
+	prompt = "($) ";
 	print_prompt(prompt);
-	get_each_paths(path);
+	get_each_paths(path, env);
 	b_size = 32;
 	input_buffer = malloc(sizeof(char) * b_size);
 	while (getline(&input_buffer, &b_size, stdin) != -1)
