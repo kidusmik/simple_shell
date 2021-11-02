@@ -26,15 +26,15 @@ int _strlen(char *string);
 int check_printenv(char *command_file);
 void _printenv(char **env);
 void _strcat(char *path, char *command, char *command_path);
-char *find_command(char *command_file, char **path, char *prompt);
+char *find_command(char *command_file, char **path, char *prompt, int mode);
 char *_strdup(char *from);
 char *get_prompt(char **env);
-void print_prompt(char *prompt);
+void print_prompt(char *prompt, int mode);
 void get_each_paths(char **path, char **env);
 void get_each_command_argv(char **command_argv, char *input_buffer);
 int _strcmp(char *string1, char *string2);
 int execute_command(char *command, char **command_argv,
-			char **env, char *prompt);
+			char **env, char *prompt, int mode);
 ssize_t line_input_check(char **input_buffer, size_t *b_size,
 				FILE *stream, char *prompt);
 void free_dptr(char **dptr1, char **dptr2, int size);

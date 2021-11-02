@@ -6,12 +6,14 @@
 *
 * Return: Always void
 */
-void print_prompt(char *prompt)
+void print_prompt(char *prompt, int mode)
 {
 	int len;
 
 	len = _strlen(prompt);
-	write(STDOUT_FILENO, prompt, len + 1);
+
+	if (mode == 1)
+		write(STDOUT_FILENO, prompt, len + 1);
 }
 
 /**
@@ -77,7 +79,7 @@ void get_each_command_argv(char **command_argv, char *input_buffer)
 * Return: 1 on success, otherwise 0
 */
 int execute_command(char *command, char **command_argv,
-				char **env, char *prompt)
+				char **env, char *prompt, int mode)
 {
 	pid_t child_pid;
 	int status;
@@ -104,7 +106,7 @@ int execute_command(char *command, char **command_argv,
 		else
 		{
 			wait(&status);
-			print_prompt(prompt);
+			print_prompt(prompt, mode);
 		}
 	}
 	return (0);
