@@ -3,6 +3,7 @@
 /**
 * print_prompt - prints the prompt
 * @prompt: the prompt string
+* @mode: the mode (interactive or non-interactive
 *
 * Return: Always void
 */
@@ -75,6 +76,7 @@ void get_each_command_argv(char **command_argv, char *input_buffer)
 * @command_argv: the command arguments list
 * @env: the environment list
 * @prompt: the prompt string
+* @mode: the mode (interactive or non-interactive
 *
 * Return: 1 on success, otherwise 0
 */

@@ -5,6 +5,7 @@
 * @command_file: the command
 * @path: the path list
 * @prompt: the prompt
+* @mode: the mode (interactive or non-interactive
 *
 * Return: pointer to the command found
 */
