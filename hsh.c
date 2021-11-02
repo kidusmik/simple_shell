@@ -15,7 +15,6 @@ int main(__attribute__((unused)) int argc,
 	int ret, mode;
 	size_t b_size;
 
-	mode = 1;
 	prompt = "($) ";
 	mode = isatty(STDIN_FILENO);
 	print_prompt(prompt, mode);
