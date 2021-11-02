@@ -8,12 +8,28 @@
 *
 * Return: Always 0.
 */
-int main(__attribute__((unused)) int argc,
-		 __attribute__((unused)) char **argv, char **env)
+int main(int argc, char **argv, char **env)
 {
 	char *input_buffer, *prompt, *command_argv[50], *path[50], *command;
 	int ret;
 	size_t b_size;
+	(void)argc;
+	
+	/* 
+	- Run command loop
+	- before that check the initialization command. 
+			- initialize the shell, only the program name is accepted
+			  passing an argument is not accepted.
+	*/
+	if (argc > 1)
+	{
+		char err_msg[100];
+
+		sprintf(err_msg, "%s: 0: Can't open %s\n", argv[1], argv[1]);
+		write(2, err_msg, strlen(err_msg));
+
+		return (0);
+	}
 
 	prompt = get_prompt(env);
 	print_prompt(prompt);
