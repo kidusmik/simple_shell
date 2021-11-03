@@ -1,6 +1,18 @@
 #include "hsh.h"
 
 /**
+* print_error - prints error message
+*/
+void handle_error(char *prog_name, int *exec_count,
+			char *command_file, int *ret_value)
+{
+	dprintf(STDERR_FILENO, "%s: %d: %s: not found\n", prog_name,
+			*exec_count, command_file);
+
+	*ret_value = 127;
+}
+
+/**
 * find_command - finds the command in the environment
 * @command_file: the command
 * @path: the path list
@@ -11,7 +23,8 @@
 * Return: pointer to the command found
 */
 char *find_command(char *command_file, char **path, char *prompt,
-			int mode, char *prog_name)
+			int mode, char *prog_name,
+			int *ret_value, int *exec_count)
 {
 	int stat_f, i;
 	char *command_path;
@@ -41,8 +54,8 @@ char *find_command(char *command_file, char **path, char *prompt,
 			i++;
 		}
 	}
-	perror(prog_name);
-	print_prompt(prompt, mode);
+	handle_error(prog_name, exec_count, command_file, ret_value);
+	print_prompt(prompt, mode, exec_count);
 
 	return (NULL);
 }
