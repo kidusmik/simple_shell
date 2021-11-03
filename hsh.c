@@ -15,7 +15,7 @@ int main(__attribute__((unused)) int argc, char **argv,
 	int ret, mode;
 	size_t b_size;
 
-	prompt = "($) ";
+	prompt = "$ ";
 	mode = isatty(STDIN_FILENO);
 	print_prompt(prompt, mode);
 	get_each_paths(path, env);
