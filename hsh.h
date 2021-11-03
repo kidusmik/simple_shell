@@ -45,5 +45,5 @@ void free_ptrs(char *ptr1, char *ptr2, char *pt3);
 void _setenv(char *env_name, char *env_value, char **env);
 char *_getenv(char *name, char **env);
 void handle_error(char *prog_name, int *exec_count,
-                        char *command_file, int *ret_value);
+			char *command_file, int *ret_value);
 #endif /* HSH_H */

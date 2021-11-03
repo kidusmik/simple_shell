@@ -2,6 +2,12 @@
 
 /**
 * print_error - prints error message
+* @prog_name: name of the shell
+* @exec_count: execution count
+* @command_file: the command name
+* @ret_value: value of the return
+*
+* Return: always Void
 */
 void handle_error(char *prog_name, int *exec_count,
 			char *command_file, int *ret_value)
@@ -9,7 +15,7 @@ void handle_error(char *prog_name, int *exec_count,
 	dprintf(STDERR_FILENO, "%s: %d: %s: not found\n", prog_name,
 			*exec_count, command_file);
 
-	*ret_value = 127;
+	*ret_value = 0;
 }
 
 /**
@@ -19,6 +25,8 @@ void handle_error(char *prog_name, int *exec_count,
 * @prompt: the prompt
 * @mode: the mode (interactive or non-interactive
 * @prog_name: name of the shell
+* @ret_value: value of return value
+* @exec_count: execution count
 *
 * Return: pointer to the command found
 */

@@ -4,6 +4,7 @@
 * print_prompt - prints the prompt
 * @prompt: the prompt string
 * @mode: the mode (interactive or non-interactive
+* @exec_count: execution count
 *
 * Return: Always void
 */
@@ -78,6 +79,7 @@ void get_each_command_argv(char **command_argv, char *input_buffer)
 * @env: the environment list
 * @prompt: the prompt string
 * @mode: the mode (interactive or non-interactive
+* @exec_count: execution count
 *
 * Return: 1 on success, otherwise 0
 */
