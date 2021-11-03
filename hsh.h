@@ -26,7 +26,8 @@ int _strlen(char *string);
 int check_printenv(char *command_file);
 void _printenv(char **env);
 void _strcat(char *path, char *command, char *command_path);
-char *find_command(char *command_file, char **path, char *prompt, int mode);
+char *find_command(char *command_file, char **path, char *prompt,
+			int mode, char *prog_name);
 char *_strdup(char *from);
 char *get_prompt(char **env);
 void print_prompt(char *prompt, int mode);

@@ -8,8 +8,7 @@
 *
 * Return: Always 0.
 */
-int main(__attribute__((unused)) int argc,
-		__attribute__((unused)) char **argv,
+int main(__attribute__((unused)) int argc, char **argv,
 		char **env)
 {
 	char *input_buffer, *prompt, *command_argv[50], *path[50], *command;
@@ -30,7 +29,7 @@ int main(__attribute__((unused)) int argc,
 			print_prompt(prompt, mode);
 			continue;
 		}
-		command = find_command(command_argv[0], path, prompt, mode);
+		command = find_command(command_argv[0], path, prompt, mode, argv[0]);
 		if (command == NULL)
 			continue;
 		ret = execute_command(command, command_argv, env, prompt, mode);

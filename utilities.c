@@ -6,10 +6,12 @@
 * @path: the path list
 * @prompt: the prompt
 * @mode: the mode (interactive or non-interactive
+* @prog_name: name of the shell
 *
 * Return: pointer to the command found
 */
-char *find_command(char *command_file, char **path, char *prompt, int mode)
+char *find_command(char *command_file, char **path, char *prompt,
+			int mode, char *prog_name)
 {
 	int stat_f, i;
 	char *command_path;
@@ -39,7 +41,7 @@ char *find_command(char *command_file, char **path, char *prompt, int mode)
 			i++;
 		}
 	}
-	perror(command_file);
+	perror(prog_name);
 	print_prompt(prompt, mode);
 
 	return (NULL);
