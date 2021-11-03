@@ -2,6 +2,7 @@
 /**
  * _getenv - get variable enviriomment
  * @name: name the variable envirionment
+ * @env: environment variable
  * Return: char value envirionment
  **/
 char *_getenv(char *name, char **env)
@@ -92,27 +93,28 @@ void print_env(char **env)
 }
 
 /**
-* get_each_command_argv - stores all the arguments \
-*             of the input command to the list
-* @args_from_line: the command argument list
-* @line: the input buffer
-*
-* Return: Always void
-*/
-void get_each_command_argv(char **args_from_line, char *line)
+ *_strncmp -  function that compares two strings.
+ *@s1: string one
+ *@s2: string two
+ *@n: number of characters
+ * Return: diference
+ */
+int _strncmp(const char *s1, const char *s2, size_t n)
 {
-	char *argvs, *delim_args;
-	int i;
+	int i = 0, j = 0;
 
-	delim_args = " \t\r\n\v\f";
-	argvs = strtok(line, delim_args);
-
-	i = 0;
-	while (argvs)
+	while (n && s1[i] && (s1[i] == s2[j]))
 	{
-		args_from_line[i] = argvs;
-		argvs = strtok(NULL, delim_args);
 		i++;
+		j++;
+		n--;
 	}
-	args_from_line[i] = NULL;
+	if (n == 0)
+	{
+		return (0);
+	}
+	else
+	{
+		return (s1[i] - s2[j]);
+	}
 }

@@ -3,7 +3,9 @@
 /**
  * main - main entry point
  * @ac: number of argument
- *
+ * @av: argument value
+ * @env: environment value
+ * Return: status
  */
 int main(int ac, char *av[], char **env)
 {
@@ -13,12 +15,6 @@ int main(int ac, char *av[], char **env)
 	int status = 0;
 	(void)ac;
 
-	/* 
-	- Run command loop
-	- before that check the initialization command. 
-			- initialize the shell, only the program name is accepted
-			  passing an argument is not accepted.
-	*/
 	if (ac > 1)
 	{
 		char err_msg[100];

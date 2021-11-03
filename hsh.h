@@ -27,6 +27,5 @@ void print_env(char **env);
 int _strcmp(char *s1, char *s2);
 int _strncmp(const char *s1, const char *s2, size_t n);
 int _strlen(const char *s);
-void get_each_command_argv(char **command_argv, char *input_buffer);
 
 #endif /* HSH_H */

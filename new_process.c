@@ -49,8 +49,6 @@ int new_process(char *av[], int exec_counter, char **env)
 		sprintf(err_msg, "%s: %d: %s: not found\n", av[0], exec_counter, av[1]);
 		write(2, err_msg, _strlen(err_msg));
 
-		/* 127 is a return value in bash script if no command 
-		   is not found in any of the $PATH. */
 		return (127);
 	}
 	return (0);
