@@ -1,59 +1,36 @@
 #include "hsh.h"
 
 /**
-* get_prompt - gets which prompt to print
-* @env: the envirnoment list
-*
-* Return: pointer to the prompt
-*/
-char *get_prompt(char **env)
-{
-	char *hsh_pid_env_name, *hsh_pid_str, *this_pid_str;
-	pid_t this_pid, hsh_pid;
-	int pid_length, env_count;
-
-	hsh_pid_env_name = "HSHPID";
-	this_pid = getpid();
-	hsh_pid_str = getenv(hsh_pid_env_name);
-	this_pid_str = pid_to_str(this_pid);
-
-	if (hsh_pid_str == NULL)
-	{
-		pid_length = len_pid(this_pid);
-		env_count = count_env_vars(env);
-		_setenv(hsh_pid_env_name, this_pid_str, env_count, pid_length, env);
-		hsh_pid = this_pid;
-	}
-	else
-		hsh_pid = str_to_pid(hsh_pid_str);
-
-	return (this_pid > hsh_pid ? "($) " : "$ ");
-}
-
-/**
 * print_prompt - prints the prompt
 * @prompt: the prompt string
+* @mode: the mode (interactive or non-interactive
 *
 * Return: Always void
 */
-void print_prompt(char *prompt)
+void print_prompt(char *prompt, int mode)
 {
-	printf("%s", prompt);
+	int len;
+
+	len = _strlen(prompt);
+
+	if (mode == 1)
+		write(STDOUT_FILENO, prompt, len + 1);
 }
 
 /**
 * get_each_paths - stores the path variables to a list
 * @path: the path list
+* @env: the environment
 *
 * Return: Always void
 */
-void get_each_paths(char **path)
+void get_each_paths(char **path, char **env)
 {
 	char *path_buff, *path_dup, *paths, *path_env_name;
 	int i;
 
 	path_env_name = "PATH";
-	path_buff = getenv(path_env_name);
+	path_buff = _getenv(path_env_name, env);
 	path_dup = _strdup(path_buff);
 	paths = strtok(path_dup, ":");
 
@@ -99,11 +76,12 @@ void get_each_command_argv(char **command_argv, char *input_buffer)
 * @command_argv: the command arguments list
 * @env: the environment list
 * @prompt: the prompt string
+* @mode: the mode (interactive or non-interactive
 *
 * Return: 1 on success, otherwise 0
 */
 int execute_command(char *command, char **command_argv,
-				char **env, char *prompt)
+				char **env, char *prompt, int mode)
 {
 	pid_t child_pid;
 	int status;
@@ -130,7 +108,7 @@ int execute_command(char *command, char **command_argv,
 		else
 		{
 			wait(&status);
-			print_prompt(prompt);
+			print_prompt(prompt, mode);
 		}
 	}
 	return (0);

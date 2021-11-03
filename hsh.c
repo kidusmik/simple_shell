@@ -11,7 +11,7 @@
 int main(int argc, char **argv, char **env)
 {
 	char *input_buffer, *prompt, *command_argv[50], *path[50], *command;
-	int ret;
+	int ret, mode;
 	size_t b_size;
 	(void)argc;
 	
@@ -31,9 +31,10 @@ int main(int argc, char **argv, char **env)
 		return (0);
 	}
 
-	prompt = get_prompt(env);
-	print_prompt(prompt);
-	get_each_paths(path);
+	prompt = "($) ";
+	mode = isatty(STDIN_FILENO);
+	print_prompt(prompt, mode);
+	get_each_paths(path, env);
 	b_size = 32;
 	input_buffer = malloc(sizeof(char) * b_size);
 	while (getline(&input_buffer, &b_size, stdin) != -1)
@@ -41,16 +42,16 @@ int main(int argc, char **argv, char **env)
 		get_each_command_argv(command_argv, input_buffer);
 		if (command_argv[0] == NULL)
 		{
-			print_prompt(prompt);
+			print_prompt(prompt, mode);
 			continue;
 		}
-		command = find_command(command_argv[0], path, prompt);
+		command = find_command(command_argv[0], path, prompt, mode);
 		if (command == NULL)
 			continue;
-		ret = execute_command(command, command_argv, env, prompt);
+		ret = execute_command(command, command_argv, env, prompt, mode);
 		if (ret)
 		{
-			print_prompt(prompt);
+			print_prompt(prompt, mode);
 			continue;
 		}
 	}
