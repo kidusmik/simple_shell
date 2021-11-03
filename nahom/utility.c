@@ -90,3 +90,29 @@ void print_env(char **env)
 		write(STDOUT_FILENO, "\n", 1);
 	}
 }
+
+/**
+* get_each_command_argv - stores all the arguments \
+*             of the input command to the list
+* @args_from_line: the command argument list
+* @line: the input buffer
+*
+* Return: Always void
+*/
+void get_each_command_argv(char **args_from_line, char *line)
+{
+	char *argvs, *delim_args;
+	int i;
+
+	delim_args = " \t\r\n\v\f";
+	argvs = strtok(line, delim_args);
+
+	i = 0;
+	while (argvs)
+	{
+		args_from_line[i] = argvs;
+		argvs = strtok(NULL, delim_args);
+		i++;
+	}
+	args_from_line[i] = NULL;
+}

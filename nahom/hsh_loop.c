@@ -16,7 +16,35 @@ int hsh_loop(char *av[], int execution_counter, char **env)
 	int read = 0;
 	size_t len = 0;
 	char *line = NULL, *args[32], *token = NULL;
+	/* 
+	char *input_buffer, *prompt, *command_argv[50], *path[50], *command;
+	int ret;
+	
 
+	prompt = get_prompt(env);
+	print_prompt(prompt);
+	get_each_paths(path);
+	b_size = 32;
+	input_buffer = malloc(sizeof(char) * b_size);
+	while (getline(&input_buffer, &b_size, stdin) != -1)
+	{
+		get_each_command_argv(command_argv, input_buffer);
+		if (command_argv[0] == NULL)
+		{
+			print_prompt(prompt);
+			continue;
+		}
+		command = find_command(command_argv[0], path, prompt);
+		if (command == NULL)
+			continue;
+		ret = execute_command(command, command_argv, env, prompt);
+		if (ret)
+		{
+			print_prompt(prompt);
+			continue;
+		}
+	}
+ */
 	/*	- determine an interactive mode or not
 		- isatty: checkes if FD is valid or not
 	 */
@@ -53,10 +81,13 @@ int hsh_loop(char *av[], int execution_counter, char **env)
 				print_env(env);
 			else if (read > 1)
 			{
-				token = strtok(line, " \t\n\r"), args[0] = av[0];
+				token = strtok(line, " \t\r\n\v\f");
+				args[0] = av[0];
 				for (i = 1; i < 32 && token != NULL; i++)
-					args[i] = token, token = strtok(NULL, " \t\n\r");
-
+				{
+					args[i] = token;
+					token = strtok(NULL, " \t\r\n\v\f");
+				}
 				args[i] = NULL;
 				if (args[1])
 				{

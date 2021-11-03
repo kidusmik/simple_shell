@@ -33,7 +33,7 @@ int new_process(char *av[], int exec_counter, char **env)
 			if ((execve(file, (av + 1), env)) == -1)
 			{
 				sprintf(err_msg, "%s: %d: %s: not found\n", av[0], exec_counter, av[1]);
-				write(2, err_msg, strlen(err_msg));
+				write(2, err_msg, _strlen(err_msg));
 				(alloc == 1) ? free(file) : (void)alloc;
 			}
 		}
@@ -47,7 +47,7 @@ int new_process(char *av[], int exec_counter, char **env)
 	else
 	{
 		sprintf(err_msg, "%s: %d: %s: not found\n", av[0], exec_counter, av[1]);
-		write(2, err_msg, strlen(err_msg));
+		write(2, err_msg, _strlen(err_msg));
 
 		/* 127 is a return value in bash script if no command 
 		   is not found in any of the $PATH. */
@@ -72,15 +72,15 @@ char *check_file(char *full_path, char *file_name)
 	token = strtok(full_path, ":");
 	while (token != NULL)
 	{
-		path_name = malloc((strlen(token) + strlen(file_name) + 2) * sizeof(char));
+		path_name = malloc((_strlen(token) + _strlen(file_name) + 2) * sizeof(char));
 		if (path_name == NULL)
 		{
 			free(path_name);
 			return (file_name);
 		}
-		strcpy(path_name, token);
-		strcat(path_name, "/");
-		strcat(path_name, file_name);
+		_strcpy(path_name, token);
+		_strcat(path_name, "/");
+		_strcat(path_name, file_name);
 		if (stat(path_name, &st) == 0)
 		{
 			return (path_name);

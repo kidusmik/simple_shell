@@ -36,49 +36,30 @@ int _strlen(const char *s)
 
 	return (i);
 }
+
 /**
- * _strcat - concatenates two strings.
- * @dest: string to destiny
- * @src: string to source
- * Return: Return a concatenate string
+ * _strcat - concatinate two strings.
+ * @dest: accepts destination string.
+ * @src: accepts source string.
+ * Return: pointer to the destination string.
  */
 char *_strcat(char *dest, char *src)
 {
-	char *output = NULL;
-	unsigned int i = 0, j = 0, len1 = 0, len2 = 0;
+	int i;
+	int j;
 
-	len1 = _strlen(dest);
-	len2 = _strlen(src);
-
-	output = _calloc(sizeof(char), (len1 + len2 + 1));
-	if (output == NULL)
-		return (NULL);
-
-	i = 0;
-	j = 0;
-
-	if (dest)
+	for (i = 0; dest[i] != '\0'; i++)
 	{
-		while (i < len1)
-		{
-			output[i] = dest[i];
-			i++;
-		}
 	}
-	/*printf("output1 -> %s \n", output);*/
-	if (src)
-	{
-		while (i < (len1 + len2))
-		{
-			output[i] = src[j];
-			i++;
-			j++;
-		}
-	}
-	/*printf("output2 -> %s \n", output);*/
-	output[i] = '\0';
 
-	return (output);
+	for (j = 0; src[j] != '\0'; j++)
+	{
+		dest[i + j] = src[j];
+	}
+
+	dest[i + j] = '\0';
+
+	return (dest);
 }
 
 /**
@@ -114,23 +95,20 @@ char *_strdup(char *str)
 }
 
 /**
- * _strcmp - this function compare two strings
- * @s1: the first string
- * @s2: the second string
- (* a blank line
- * Description: this function comparing two strings using the first value)?
- (* section header: the header of this function is holberton.h)*
- * Return: return a number depends os the resul fo comparation.
+ * _strcmp - compare two strings.
+ * @s1: accepts destination string.
+ * @s2: accepts source string.
+ * Return: pointer to the destination string.
  */
 int _strcmp(char *s1, char *s2)
 {
-	int j;
+	int i;
 
-	for (j = 0; s1[j] != '\0' || s2[j] != '\0'; j++)
+	for (i = 0; s1[i] != '\0' && s2[i] != '\0'; i++)
 	{
-		if (s1[j] != s2[j])
+		if (s1[i] != s2[i])
 		{
-			return (s1[j] - s2[j]);
+			return (s1[i] - s2[i]);
 		}
 	}
 	return (0);
