@@ -17,7 +17,7 @@ int hsh_loop(char *av[], int execution_counter, char **env)
 	isatty(STDIN_FILENO) == 0 ? interactive = 0 : interactive;
 	while (1)
 	{
-		interactive == 1 ? write(STDIN_FILENO, "($) ", 2) : interactive;
+		interactive == 1 ? write(STDIN_FILENO, "($) ", 4) : interactive;
 
 		read = getline(&line, &len, stdin);
 		if (read == EOF)
