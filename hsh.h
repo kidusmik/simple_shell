@@ -1,49 +1,32 @@
 #ifndef HSH_H
 #define HSH_H
-
+#define _GNU_SOURCE
 #include <stdio.h>
+#include <sys/types.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include <sys/wait.h>
 #include <sys/types.h>
-#include <string.h>
+#include <sys/wait.h>
 #include <sys/stat.h>
+#include <fcntl.h>
+#include <string.h>
+#include <errno.h>
 
-int check_command(char *command_file, char *prompt);
-int check_exit(char *command_file);
-int run_child_shell(void);
-int check_hsh(char *command_file);
-int len_pid(pid_t pid);
-char *pid_to_str(pid_t pid);
-int char_to_int(char *ch);
-pid_t str_to_pid(char *pid_str);
-int power(int a, int b);
-int count_env_vars(char **env);
-void _setenvhsh(char *hsh_env_name, char *this_pid_str,
-		int env_count, int pid_length,
-		char **env);
-int _strlen(char *string);
-int check_printenv(char *command_file);
-void _printenv(char **env);
-void _strcat(char *path, char *command, char *command_path);
-char *find_command(char *command_file, char **path, char *prompt,
-			int mode, char *prog_name,
-			int *ret_value, int *exec_count);
-char *_strdup(char *from);
-char *get_prompt(char **env);
-void print_prompt(char *prompt, int mode, int *exec_count);
-void get_each_paths(char **path, char **env);
-void get_each_command_argv(char **command_argv, char *input_buffer);
-int _strcmp(char *string1, char *string2);
-int execute_command(char *command, char **command_argv,
-			char **env, char *prompt,
-			int mode, int *exec_count);
-ssize_t line_input_check(char **input_buffer, size_t *b_size,
-				FILE *stream, char *prompt);
-void free_dptr(char **dptr1, char **dptr2, int size);
-void free_ptrs(char *ptr1, char *ptr2, char *pt3);
-void _setenv(char *env_name, char *env_value, char **env);
+/* Shell functions*/
+int hsh_loop(char *av[], int execution_counter, char **env);
+int new_process(char *av[], int execution_counter, char **env);
+
+/* diffrent utility functions */
+char *_strdup(char *str);
+char *_strcat(char *dest, char *src);
+char *_strcpy(char *dest, char *src);
 char *_getenv(char *name, char **env);
-void handle_error(char *prog_name, int *exec_count,
-			char *command_file, int *ret_value);
+char *_memset(char *s, char b, unsigned int n);
+void *_calloc(unsigned int nmemb, int size);
+void print_env(char **env);
+int _strcmp(char *s1, char *s2);
+int _strncmp(const char *s1, const char *s2, size_t n);
+int _strlen(const char *s);
+void get_each_command_argv(char **command_argv, char *input_buffer);
+
 #endif /* HSH_H */
